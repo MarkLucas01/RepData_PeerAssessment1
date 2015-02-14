@@ -22,3 +22,5 @@ hist(steps_day, breaks=53,
 # Note: the # of steps/day is stored in the steps_day vector
 ds_mean <- mean(steps_day)
 ds_median <- median(steps_day)
+
+# Next steps
