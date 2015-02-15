@@ -57,9 +57,30 @@ ds_median
 
 ## What is the average daily activity pattern?
 
+```r
+# 1. Time series plot: 5-minute interval (x-axis) and the 
+#     average number of steps taken,
+#     averaged across all days (y-axis) 
+interval_avg_step <- aggregate(steps ~ interval, dat2, FUN=mean)
+plot(interval_avg_step$interval, interval_avg_step$steps, type='l',
+     main='Average Daily Activity - Time Series Plot',
+     xlab='5 Minute Interval', ylab='Number of Steps')
+```
 
+![](PA1_template_files/figure-html/activity_time_series-1.png) 
 
-## Imputing missing values
+```r
+# 2. Which 5-minute interval, on average across all the days
+#    in the dataset, contains the maximum number of steps?
+interval_avg_step[which(interval_avg_step$steps == max(interval_avg_step$steps)),]
+```
+
+```
+##     interval    steps
+## 104      835 206.1698
+```
+
+## Inputing missing values
 
 
 

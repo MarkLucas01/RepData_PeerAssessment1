@@ -14,6 +14,8 @@ dat$date <- as.Date(dat$date,'%Y-%m-%d')
 # data set (dat2) to exclude the missing values
 dat2 <- na.omit(dat)
 
+### What is mean total number of steps taken per day?
+
 # 1. Calculate the total # of steps per day
 steps_day <- tapply(dat2$steps, dat2$date, sum, na.rm = TRUE)
 
@@ -30,4 +32,17 @@ hist(steps_day, breaks=53,
 ds_mean <- mean(steps_day)
 ds_median <- median(steps_day)
 
-# Next steps
+### What is the average daily activity pattern?
+
+# 1. Time series plot: 5-minute interval (x-axis) and the 
+#     average number of steps taken,
+#     averaged across all days (y-axis) 
+interval_avg_step <- aggregate(steps ~ interval, dat2, FUN=mean)
+plot(interval_avg_step$interval, interval_avg_step$steps, type='l',
+     main='Average Daily Activity - Time Series Plot',
+     xlab='5 Minute Interval', ylab='Number of Steps')
+
+# 2. Which 5-minute interval, on average across all the days
+#    in the dataset, contains the maximum number of steps?
+interval_avg_step[which(interval_avg_step$steps == max(interval_avg_step$steps)),]
+
