@@ -1,4 +1,8 @@
 # Peer Assessment 1 - activity monitoring devices
+# Goal - single R markdown document that can be processed by 
+#        knitr and be transformed into an HTML file.
+
+library(knitr)
 
 # Load & preprocess the data
 dat <- read.csv("activity.csv", na.strings = "NA")
