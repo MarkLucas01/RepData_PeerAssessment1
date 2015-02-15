@@ -91,3 +91,37 @@ ds_median
 # The reason for the very small impact to the new dataset is due to the stratedgy of using the
 # mean from the original dataset to replace NAs; resulting in a similar, but more normalized dataset
 
+### Are there differences in activity patterns between weekdays and weekends?
+
+# For this part the weekdays() function may be of some help here.
+
+# add a day of the week column to our dataset
+dat3$wdays <- weekdays(dat3$date)
+
+# 1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating 
+#    whether a given date is a weekday or weekend day.
+
+# Replacing the values in the new column with Weekday or Weekend
+dat3$wdays[dat3$wdays=='Saturday'] <- 'Weekend'
+dat3$wdays[dat3$wdays=='Sunday']   <- 'Weekend'
+dat3$wdays[dat3$wdays=='Monday']   <- 'Weekday'
+dat3$wdays[dat3$wdays=='Tuesday']  <- 'Weekday'
+dat3$wdays[dat3$wdays=='Wednesday']<- 'Weekday'
+dat3$wdays[dat3$wdays=='Thursday'] <- 'Weekday'
+dat3$wdays[dat3$wdays=='Friday']   <- 'Weekday'
+
+# 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) 
+#    and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). 
+#    See the README file in the GitHub repository to see an example of what this plot should look like 
+#    using simulated data.
+
+interval_avg_step_by_day <- aggregate(steps ~ interval+wdays, dat3, mean)
+
+# Plot the information
+library(lattice)
+
+xyplot(interval_avg_step_by_day$steps ~ interval_avg_step_by_day$interval | interval_avg_step_by_day$wdays, 
+       layout = c(1, 2), type = "l", 
+       main = 'Weekday vs. Weekend - Average Daily Activity',
+       xlab = '5-Minute Interval', ylab='Average Steps Taken')
+
