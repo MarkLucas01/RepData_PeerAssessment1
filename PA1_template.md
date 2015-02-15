@@ -1,13 +1,9 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output:
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
-```{r load_data, echo=TRUE}
+
+```r
 # Load the data from your current working directory
 dat <- read.csv("activity.csv", na.strings = "NA")
 
@@ -20,7 +16,8 @@ dat2 <- na.omit(dat)
 ```
 
 ## What is mean total number of steps taken per day?
-```{r steps_day, echo=TRUE}
+
+```r
 # 1. Calculate the total # of steps per day
 steps_day <- tapply(dat2$steps, dat2$date, sum, na.rm = TRUE)
 
@@ -31,7 +28,11 @@ hist(steps_day, breaks=53,
      main="Total Number of Steps per Day",
      xlab="Steps per Day",
      ylab="Number of Occurences")
+```
 
+![](PA1_template_files/figure-html/steps_day-1.png) 
+
+```r
 # 3. Calculate and report the mean & median total steps per day
 # Note: the # of steps/day is stored in the steps_day vector
 ds_mean <- mean(steps_day)
@@ -39,9 +40,19 @@ ds_median <- median(steps_day)
 
 # The mean steps per day is...
 ds_mean
+```
 
+```
+## [1] 10766.19
+```
+
+```r
 # The median steps per day is...
 ds_median
+```
+
+```
+## [1] 10765
 ```
 
 ## What is the average daily activity pattern?
